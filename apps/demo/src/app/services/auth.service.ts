@@ -2,22 +2,25 @@ import { LoginCredentials } from '../models/login-credentials.model';
 import { RegisterCredentials } from '../models/register-credentials.model';
 import { User } from '../models/user.model';
 import { getHeaders } from '../utils/headers.util';
+
+import { LOGIN_URL, REGISTER_URL, USER_URL } from './constants';
+
 export async function login(credentials: LoginCredentials) {
-  return fetch('https://api.realworld.io/api/users/login', {
+  return fetch(LOGIN_URL, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify({ user: credentials }),
   });
 }
 export async function register(credentials: RegisterCredentials) {
-  return fetch('https://api.realworld.io/api/users', {
+  return fetch(REGISTER_URL, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify({ user: credentials }),
   });
 }
 export async function getCurrentUser(): Promise<User> {
-  return fetch('https://api.realworld.io/api/user', {
+  return fetch(USER_URL, {
     method: 'GET',
     headers: getHeaders(),
   })
@@ -26,7 +29,7 @@ export async function getCurrentUser(): Promise<User> {
 }
 
 export async function updateUser(user: unknown) {
-  return fetch('https://api.realworld.io/api/user', {
+  return fetch(USER_URL, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify({ user }),
